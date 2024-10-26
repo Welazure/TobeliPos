@@ -11,6 +11,6 @@ public class CatalogDeleteMenu extends SubMenu {
 
     @Override
     public void show() {
-        super.show();
+
     }
 }
