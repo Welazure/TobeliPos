@@ -68,8 +68,14 @@ public class CatalogAddMenu extends SubMenu {
                     System.out.println("Invalid input!");
                 }
             }
-
-            Item item = new Item(name, id, description, price, quantity);
+            String unit;
+            while(true) {
+                System.out.print("Input quantity unit...");
+                unit = rd.readLine();
+                if(!name.isEmpty()) break;
+                System.out.println("Quantity unit cannot be empty!");
+            }
+            Item item = new Item(name, id, description, price, quantity, unit);
             catalog.addItem(item);
 
             getParent().show();

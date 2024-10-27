@@ -35,7 +35,7 @@ public class CatalogMenu extends Menu {
 
     //
     public void printToShow() {
-        if(toShow.isEmpty()) return;
+        if (toShow.isEmpty()) return;
         printToShowUnconditionally();
     }
 
@@ -46,6 +46,7 @@ public class CatalogMenu extends Menu {
         }
         System.out.println("\n");
     }
+
     public List<Item> getToShow() {
         return toShow;
     }
@@ -118,17 +119,22 @@ public class CatalogMenu extends Menu {
 
         System.out.println("Searching... ");
         String input;
-        while(true){
+        while (true) {
             System.out.print("Input keyword: ");
             input = rd.readLine();
-            if(!input.isEmpty())
+            if (!input.isEmpty())
                 break;
             System.out.println("Input cannot be empty!");
         }
 
         String finalInput = input;
         setToShow(catalog.getList().stream().filter(x ->
-            x.getID().contains(finalInput) || x.getName().contains(finalInput) || x.getDescription().contains(finalInput))
+                        x.getID().toLowerCase()
+                                .contains(finalInput.toLowerCase()) ||
+                        x.getName().toLowerCase()
+                                .contains(finalInput.toLowerCase()) ||
+                        x.getDescription().toLowerCase()
+                                .contains(finalInput.toLowerCase()))
                 .collect(Collectors.toList()));
     }
 

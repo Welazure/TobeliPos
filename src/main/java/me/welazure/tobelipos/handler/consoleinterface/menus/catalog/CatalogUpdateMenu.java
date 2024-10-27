@@ -46,6 +46,7 @@ public class CatalogUpdateMenu extends SubMenu {
                                 "[3]: Description\n" +
                                 "[4]: Price\n" +
                                 "[5]: Stock\n" +
+                                "[6]: Quantity unit\n" +
                                 "[9]: Unselect item\n" +
                                 "[0]: Return\n" +
                                 "Input: ", 0, 9);
@@ -64,6 +65,9 @@ public class CatalogUpdateMenu extends SubMenu {
                         break;
                     case 5:
                         showStockUpdateMenu(parentMenu, rd);
+                        break;
+                    case 6:
+                        showUnitUpdateMenu(parentMenu, rd);
                         break;
                     case 0:
                         getParent().show();
@@ -185,5 +189,21 @@ public class CatalogUpdateMenu extends SubMenu {
             }
         }
         selected.setQuantity(quantity);
+    }
+    public void showUnitUpdateMenu(CatalogMenu catalogMenu, Reader rd) {
+        getHandler().clearConsole();
+        getHandler().clearConsole();
+        if (selected == null)
+            return;
+        System.out.println("Item being updated: \n" + selected);
+        System.out.println("\n");
+        String newUnit;
+        while (true) {
+            System.out.print("Insert new quantity unit...");
+            newUnit = rd.readLine();
+            if (!newUnit.isEmpty()) break;
+            System.out.println("Quantity unit cannot be empty!");
+        }
+        selected.setUnit(newUnit);
     }
 }

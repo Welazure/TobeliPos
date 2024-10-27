@@ -7,13 +7,15 @@ public class Item {
     private String description;
     private double price;
     private int quantity;
+    private String unit;
 
-    public Item(String name, String ID, String description, double price, int quantity) {
+    public Item(String name, String ID, String description, double price, int quantity, String unit) {
         this.name = name;
         this.ID = ID;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
+        this.unit = unit;
     }
     public String getName() {
         return name;
@@ -45,9 +47,14 @@ public class Item {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
+    public String getUnit() {
+        return unit;
+    }
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
     @Override
     public String toString() {
-        return String.format("Item %s, ID: %s, Description: %s, Price: %s%.2f, Stock: %s", name, ID, description, CURRENCY, price, quantity);
+        return String.format("Item %s, ID: %s, Description: %s, Price: %s%.2f, Stock: %s %s", name, ID, description, CURRENCY, price, quantity, unit);
     }
 }

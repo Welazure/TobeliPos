@@ -44,10 +44,10 @@ public class Delegator {
         users = new UserHandler();
         catalog = new CatalogHandler();
 
-        catalog.addItem(new Item("asdfasdf", "asdfasdf", "asdfasdf", 10000.0d, 100));
-        catalog.addItem(new Item("asdfasdf1", "asdfasdf1", "asdfasdf1", 10000.0d, 100));
-        catalog.addItem(new Item("asdfasdf2", "asdfasdf2", "asdfasdf2", 10000.0d, 100));
-        catalog.addItem(new Item("asdfasdf3", "asdfasdf3", "asdfasdf3", 10000.0d, 100));
+        catalog.addItem(new Item("Garam", "S001", "Garam Dapur", 10000.0d, 100, "Bungkus"));
+        catalog.addItem(new Item("Merica", "S002", "Merica Putih", 10000.0d, 100, "Bungkus"));
+        catalog.addItem(new Item("Cengkeh", "S003", "Cengkeh", 10000.0d, 100, "Bungkus"));
+        catalog.addItem(new Item("Syrup", "D001", "Sirup", 10000.0d, 100, "Botol"));
 
         users.createUser(true, "root", "root");
         menuHandler = new MenuHandler(this);
