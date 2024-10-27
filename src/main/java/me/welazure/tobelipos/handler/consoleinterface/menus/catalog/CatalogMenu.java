@@ -5,11 +5,13 @@ import me.welazure.tobelipos.handler.catalog.CatalogHandler;
 import me.welazure.tobelipos.handler.catalog.Item;
 import me.welazure.tobelipos.handler.consoleinterface.MenuHandler;
 import me.welazure.tobelipos.handler.consoleinterface.menus.Menu;
+import me.welazure.tobelipos.utils.Reader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CatalogMenu extends Menu {
     private Map<String, Menu> subMenus;
@@ -29,15 +31,29 @@ public class CatalogMenu extends Menu {
         subMenus.put("add", new CatalogAddMenu(this));
         subMenus.put("update", new CatalogUpdateMenu(this));
         subMenus.put("delete", new CatalogDeleteMenu(this));
-        subMenus.put("search", new CatalogSearchMenu(this));
     }
-//
+
+    //
+    public void printToShow() {
+        if(toShow.isEmpty()) return;
+        printToShowUnconditionally();
+    }
+
+    public void printToShowUnconditionally() {
+        System.out.println("Items list: ");
+        for (Item item : toShow) {
+            System.out.println(item.toString());
+        }
+        System.out.println("\n");
+    }
     public List<Item> getToShow() {
         return toShow;
     }
+
     public void setToShow(List<Item> toShow) {
         this.toShow = toShow;
     }
+
     public List<Item> getToShow(int start, int end) {
         int size = toShow.size();
         if (start < 0 || end < 0 || end > size || start >= end) {
@@ -60,13 +76,8 @@ public class CatalogMenu extends Menu {
     public void show() {
         while (true) {
             getHandler().clearConsole();
-            if(!toShow.isEmpty()) {
-                System.out.println("Items list: ");
-                for (Item item : toShow) {
-                    System.out.println(item.toString());
-                }
-                System.out.println("\n");
-            }
+
+            printToShow();
 
             int input = getHandler().getOptions(false,
                     "[1]: Add\n" +
@@ -79,6 +90,7 @@ public class CatalogMenu extends Menu {
             switch (input) {
                 case 0:
                     getHandler().mainMenu();
+                    break;
                 case 1:
                     getSubMenus().get("add").show();
                     break;
@@ -89,22 +101,37 @@ public class CatalogMenu extends Menu {
                     getSubMenus().get("delete").show();
                     break;
                 case 4:
-                    getSubMenus().get("search").show();
+                    search(getHandler().getDelegator().getReader());
                     break;
                 case 5:
                     setToShow(catalog.getList());
-                    continue;
+                    break;
                 default:
                     break;
             }
         }
     }
 
-    public void printItemList(List<Item> items) {
-        items.forEach(x -> {
-            System.out.println(x.toString());
-        });
+    public void search(Reader rd) {
+        getHandler().clearConsole();
+        printToShow();
+
+        System.out.println("Searching... ");
+        String input;
+        while(true){
+            System.out.print("Input keyword: ");
+            input = rd.readLine();
+            if(!input.isEmpty())
+                break;
+            System.out.println("Input cannot be empty!");
+        }
+
+        String finalInput = input;
+        setToShow(catalog.getList().stream().filter(x ->
+            x.getID().contains(finalInput) || x.getName().contains(finalInput) || x.getDescription().contains(finalInput))
+                .collect(Collectors.toList()));
     }
+
 
     public Map<String, Menu> getSubMenus() {
         return subMenus;

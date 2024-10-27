@@ -1,6 +1,7 @@
 package me.welazure.tobelipos.handler.catalog;
 
 public class Item {
+    private final String CURRENCY = "Rp. ";
     private String name;
     private String ID;
     private String description;
@@ -47,6 +48,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return String.format("Item %s, ID: %s, Description: %s, Price: %.2f, Stock: %s, ", name, ID, description, price, quantity);
+        return String.format("Item %s, ID: %s, Description: %s, Price: %s%.2f, Stock: %s", name, ID, description, CURRENCY, price, quantity);
     }
 }

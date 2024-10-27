@@ -89,4 +89,9 @@ public class CatalogHandler implements Catalog {
     public void addItem(Item item) {
         items.add(item);
     }
+
+    @Override
+    public void removeItem(Item item) {
+        items.remove(item);
+    }
 }

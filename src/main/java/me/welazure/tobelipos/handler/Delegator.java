@@ -6,6 +6,7 @@ import me.welazure.tobelipos.handler.auth.user.User;
 import me.welazure.tobelipos.handler.auth.Authenticator;
 import me.welazure.tobelipos.handler.catalog.Catalog;
 import me.welazure.tobelipos.handler.catalog.CatalogHandler;
+import me.welazure.tobelipos.handler.catalog.Item;
 import me.welazure.tobelipos.handler.consoleinterface.MenuHandler;
 import me.welazure.tobelipos.handler.auth.Users;
 import me.welazure.tobelipos.utils.Reader;
@@ -43,6 +44,11 @@ public class Delegator {
         users = new UserHandler();
         catalog = new CatalogHandler();
 
+        catalog.addItem(new Item("asdfasdf", "asdfasdf", "asdfasdf", 10000.0d, 100));
+        catalog.addItem(new Item("asdfasdf1", "asdfasdf1", "asdfasdf1", 10000.0d, 100));
+        catalog.addItem(new Item("asdfasdf2", "asdfasdf2", "asdfasdf2", 10000.0d, 100));
+        catalog.addItem(new Item("asdfasdf3", "asdfasdf3", "asdfasdf3", 10000.0d, 100));
+
         users.createUser(true, "root", "root");
         menuHandler = new MenuHandler(this);
 
@@ -79,5 +85,9 @@ public class Delegator {
 
         currentUser = user;
         return true;
+    }
+
+    public void exit() {
+        System.exit(0);
     }
 }

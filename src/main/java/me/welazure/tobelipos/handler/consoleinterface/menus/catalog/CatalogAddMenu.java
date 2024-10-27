@@ -7,6 +7,8 @@ import me.welazure.tobelipos.handler.consoleinterface.menus.Menu;
 import me.welazure.tobelipos.handler.consoleinterface.menus.SubMenu;
 import me.welazure.tobelipos.utils.Reader;
 
+import java.util.List;
+
 public class CatalogAddMenu extends SubMenu {
     public CatalogAddMenu(Menu menu) {
         super(menu);
@@ -18,8 +20,9 @@ public class CatalogAddMenu extends SubMenu {
         Reader rd = getHandler().getDelegator().getReader();
         while (true) {
             getHandler().clearConsole();
+            ((CatalogMenu) getParent()).printToShow();
 
-            System.out.println("Addding Item... ");
+            System.out.println("Adding Item... ");
             String id = "";
             String name = "";
             String description = "";
@@ -29,13 +32,22 @@ public class CatalogAddMenu extends SubMenu {
             while (true) {
                 System.out.print("Input ID: ");
                 id = rd.readLine();
-                if (catalog.getItemById(id) != null)
+                if (catalog.getItemById(id) != null) {
                     System.out.println("ID Already in use!");
+                    continue;
+                }
+                if(id.isEmpty()) {
+                    System.out.println("ID cannot be empty!");
+                }
                 break;
             }
 
-            System.out.print("Input name...");
-            name = rd.readLine();
+            while(true) {
+                System.out.print("Input name...");
+                name = rd.readLine();
+                if(!name.isEmpty()) break;
+                System.out.println("Name cannot be empty!");
+            }
             System.out.print("Input description...");
             description = rd.readLine();
             while (true) {
@@ -57,7 +69,7 @@ public class CatalogAddMenu extends SubMenu {
                 }
             }
 
-            Item item = new Item(id, name, description, price, quantity);
+            Item item = new Item(name, id, description, price, quantity);
             catalog.addItem(item);
 
             getParent().show();

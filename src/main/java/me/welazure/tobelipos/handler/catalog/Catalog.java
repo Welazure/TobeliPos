@@ -13,6 +13,7 @@ public interface Catalog {
     List<Item> searchItemByName(String name);
     List<Item> searchItemByID(String id);
     void addItem(Item item);
+    void removeItem(Item item);
 
     enum SortBy {
         NAME,
