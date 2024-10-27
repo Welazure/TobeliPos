@@ -1,5 +1,7 @@
 package me.welazure.tobelipos.handler.catalog;
 
+import me.welazure.tobelipos.utils.comparator.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

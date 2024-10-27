@@ -1,4 +1,6 @@
-package me.welazure.tobelipos.handler.catalog;
+package me.welazure.tobelipos.utils.comparator;
+
+import me.welazure.tobelipos.handler.catalog.Item;
 
 import java.util.Comparator;
 
