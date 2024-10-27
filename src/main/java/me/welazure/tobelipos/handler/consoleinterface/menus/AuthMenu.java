@@ -1,9 +1,9 @@
 package me.welazure.tobelipos.handler.consoleinterface.menus;
 
-import me.welazure.tobelipos.handler.auth.user.User;
 import me.welazure.tobelipos.handler.auth.Authenticator;
-import me.welazure.tobelipos.handler.consoleinterface.MenuHandler;
 import me.welazure.tobelipos.handler.auth.Users;
+import me.welazure.tobelipos.handler.auth.user.User;
+import me.welazure.tobelipos.handler.consoleinterface.MenuHandler;
 import me.welazure.tobelipos.utils.Reader;
 
 public class AuthMenu extends Menu {

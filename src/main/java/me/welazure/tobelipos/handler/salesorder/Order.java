@@ -1,27 +1,24 @@
 package me.welazure.tobelipos.handler.salesorder;
 
-import me.welazure.tobelipos.handler.auth.user.User;
 import me.welazure.tobelipos.handler.catalog.Item;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Order {
     private String ID;
-    private User customer;
-    private double total;
+    private String customer;
     private String status;
     private LocalDateTime orderDate;
-    private List<Item> items;
+    private Map<Item, Integer> items;
 
-    public Order(String ID, User customer, double total, String status, LocalDateTime orderDate) {
-        this(ID, customer, total, status, orderDate, new ArrayList<>());
+    public Order(String ID, String customer, String status, LocalDateTime orderDate) {
+        this(ID, customer, status, orderDate, new HashMap<>());
     }
-    public Order(String ID, User customer, double total, String status, LocalDateTime orderDate, List<Item> items) {
+    public Order(String ID, String customer, String status, LocalDateTime orderDate, Map<Item, Integer> items) {
         this.ID = ID;
         this.customer = customer;
-        this.total = total;
         this.status = status;
         this.orderDate = orderDate;
         this.items = items;
@@ -33,18 +30,20 @@ public class Order {
     public void setID(String ID) {
         this.ID = ID;
     }
-    public User getCustomer() {
+    public String getCustomer() {
         return customer;
     }
-    public void setCustomer(User customer) {
+    public void setCustomer(String customer) {
         this.customer = customer;
     }
     public double getTotal() {
-        return total;
+        double sum = 0;
+        for(Map.Entry<Item, Integer> entry : items.entrySet()) {
+            sum += entry.getKey().getPrice() * entry.getValue();
+        }
+        return sum;
     }
-    public void setTotal(double total) {
-        this.total = total;
-    }
+
     public String getStatus() {
         return status;
     }
@@ -57,11 +56,31 @@ public class Order {
     public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
-    public List<Item> getItems() {
+    public Map<Item, Integer> getItems() {
         return items;
     }
-    public void setItems(List<Item> items) {
+    public void additem(Item item, int quantity) {
+        if(items.containsKey(item)) {
+            items.put(item, items.get(item) + quantity);
+            return;
+        }
+        items.put(item, quantity);
+    }
+    public void setItems(Map<Item, Integer> items) {
         this.items = items;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.format("Order #%s, Customer: %s, Total: %.2f, Date: %s, Status: %s\n", ID, customer, getTotal(), orderDate, status));
+        builder.append("Items ordered: \n");
+        getItems().forEach((x, y) -> {
+            builder.append("\t");
+            builder.append(x.toString(y));
+            builder.append("\n");
+        });
+
+        return builder.toString();
+    }
 }

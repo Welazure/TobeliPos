@@ -2,10 +2,10 @@ package me.welazure.tobelipos.handler.auth.user;
 
 
 public abstract class User {
-    private String name;
-    private int id;
+    private final String name;
+    private final int id;
 
-    private String hashedPass;
+    private final String hashedPass;
     private String authToken;
 
     public User(final int id, final String name, final String hashedPass) {

@@ -1,7 +1,7 @@
 package me.welazure.tobelipos.handler.consoleinterface.menus;
 
 public abstract class SubMenu extends Menu {
-    private Menu parent;
+    private final Menu parent;
 
     public SubMenu(Menu parent) {
         super(parent.getHandler());

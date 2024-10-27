@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserHandler implements Users {
-    private List<User> users;
+    private final List<User> users;
     public UserHandler() {
         users = new ArrayList<User>();
     }

@@ -1,10 +1,13 @@
 package me.welazure.tobelipos.handler.consoleinterface.menus;
 
 import me.welazure.tobelipos.handler.consoleinterface.MenuHandler;
+
+import java.util.Map;
 import java.util.Scanner;
 
 public abstract class Menu {
-    private MenuHandler handler;
+    private final MenuHandler handler;
+    private Map<String, SubMenu> subMenus;
 
     public Menu(MenuHandler handler) {
         this.handler = handler;
@@ -17,5 +20,8 @@ public abstract class Menu {
     }
     public MenuHandler getHandler() {
         return handler;
+    }
+    public Map<String, SubMenu> getSubMenus() {
+        return subMenus;
     }
 }

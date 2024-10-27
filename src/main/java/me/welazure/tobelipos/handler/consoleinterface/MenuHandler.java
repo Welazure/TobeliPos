@@ -2,17 +2,20 @@ package me.welazure.tobelipos.handler.consoleinterface;
 
 
 import me.welazure.tobelipos.handler.Delegator;
-import me.welazure.tobelipos.handler.consoleinterface.menus.*;
-import me.welazure.tobelipos.handler.consoleinterface.menus.catalog.CatalogMenu;
-import me.welazure.tobelipos.utils.Reader;
+import me.welazure.tobelipos.handler.consoleinterface.menus.AuthMenu;
+import me.welazure.tobelipos.handler.consoleinterface.menus.MainMenu;
+import me.welazure.tobelipos.handler.consoleinterface.menus.Menu;
 
+import me.welazure.tobelipos.handler.consoleinterface.menus.catalog.CatalogMenu;
+import me.welazure.tobelipos.handler.consoleinterface.menus.salesorder.SalesMenu;
+import me.welazure.tobelipos.utils.Reader;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MenuHandler {
     private Map<String, Menu> menus;
-    private Delegator dlg;
+    private final Delegator dlg;
 
     public MenuHandler(Delegator dlg) {
         this.dlg = dlg;
@@ -24,6 +27,7 @@ public class MenuHandler {
         menus.put("auth", new AuthMenu(this));
         menus.put("main", new MainMenu(this));
         menus.put("catalog", new CatalogMenu(this));
+        menus.put("sales", new SalesMenu(this));
     }
 
     public Delegator getDelegator() {

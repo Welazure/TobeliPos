@@ -2,9 +2,6 @@ package me.welazure.tobelipos;
 
 import me.welazure.tobelipos.handler.Delegator;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 
 /**
  * Hello world!

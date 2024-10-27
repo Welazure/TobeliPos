@@ -1,7 +1,6 @@
 package me.welazure.tobelipos.handler.consoleinterface.menus;
 
 
-import me.welazure.tobelipos.handler.Delegator;
 import me.welazure.tobelipos.handler.auth.user.Admin;
 import me.welazure.tobelipos.handler.auth.user.User;
 import me.welazure.tobelipos.handler.consoleinterface.MenuHandler;
@@ -46,7 +45,7 @@ public class MainMenu extends Menu {
                 getHandler().getMenus().get("catalog").show();
                 break;
             case 2:
-                getHandler().getMenus().get("salesOrder").show();
+                getHandler().getMenus().get("sales").show();
                 break;
 //            case 9:
 //                Delegator dlg = getHandler().getDelegator();

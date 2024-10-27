@@ -1,35 +1,39 @@
-package me.welazure.tobelipos.handler.consoleinterface.menus.catalog;
+package me.welazure.tobelipos.handler.consoleinterface.menus.salesorder;
 
-import me.welazure.tobelipos.handler.catalog.Catalog;
-import me.welazure.tobelipos.handler.catalog.Item;
 import me.welazure.tobelipos.handler.consoleinterface.MenuHandler;
 import me.welazure.tobelipos.handler.consoleinterface.menus.Menu;
 import me.welazure.tobelipos.handler.consoleinterface.menus.SubMenu;
+import me.welazure.tobelipos.handler.consoleinterface.menus.catalog.CatalogAddMenu;
+import me.welazure.tobelipos.handler.consoleinterface.menus.catalog.CatalogDeleteMenu;
+import me.welazure.tobelipos.handler.consoleinterface.menus.catalog.CatalogSearchMenu;
+import me.welazure.tobelipos.handler.consoleinterface.menus.catalog.CatalogUpdateMenu;
+import me.welazure.tobelipos.handler.salesorder.Order;
+import me.welazure.tobelipos.handler.salesorder.SalesOrder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CatalogMenu extends Menu {
+public class SalesMenu extends Menu {
     private final Map<String, SubMenu> subMenus;
-    private final Catalog catalog;
-    private List<Item> toShow;
+    private final SalesOrder salesOrder;
+    private List<Order> toShow;
 //    private int page = 1;
 //    private static final int ITEM_PER_PAGE = 5;
 
 
-    public CatalogMenu(MenuHandler handler) {
+    public SalesMenu(MenuHandler handler) {
         super(handler);
 
         subMenus = new HashMap<>();
-        catalog = getHandler().getDelegator().getCatalog();
+        salesOrder = getHandler().getDelegator().getSalesOrder();
         toShow = new ArrayList<>();
 
-        subMenus.put("add", new CatalogAddMenu(this));
-        subMenus.put("update", new CatalogUpdateMenu(this));
-        subMenus.put("delete", new CatalogDeleteMenu(this));
-        subMenus.put("search", new CatalogSearchMenu(this));
+        subMenus.put("add", new SalesAddMenu(this));
+        subMenus.put("update", new SalesUpdateMenu(this));
+        subMenus.put("delete", new SalesDeleteMenu(this));
+        subMenus.put("search", new SalesSearchMenu(this));
     }
 
     //
@@ -39,22 +43,22 @@ public class CatalogMenu extends Menu {
     }
 
     public void printToShowUnconditionally() {
-        System.out.println("Items list: ");
-        for (Item item : toShow) {
-            System.out.println(item.toString(catalog.getItemCount(item)));
+        System.out.println("Orders list: \n");
+        for (Order order : toShow) {
+            System.out.println(order.toString());
         }
         System.out.println("\n");
     }
 
-    public List<Item> getToShow() {
+    public List<Order> getToShow() {
         return toShow;
     }
 
-    public void setToShow(List<Item> toShow) {
+    public void setToShow(List<Order> toShow) {
         this.toShow = toShow;
     }
 
-    public List<Item> getToShow(int start, int end) {
+    public List<Order> getToShow(int start, int end) {
         int size = toShow.size();
         if (start < 0 || end < 0 || end > size || start >= end) {
             return new ArrayList<>();
@@ -102,7 +106,7 @@ public class CatalogMenu extends Menu {
                 getSubMenus().get("search").show();
                 break;
             case 5:
-                setToShow(catalog.getList());
+                setToShow(salesOrder.getList());
                 show();
                 break;
             default:

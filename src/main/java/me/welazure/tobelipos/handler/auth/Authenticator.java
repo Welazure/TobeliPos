@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Authenticator {
-    private Map<String, String> tokens;
+    private final Map<String, String> tokens;
 
     public Authenticator() {
         tokens = new HashMap<>();
@@ -50,7 +50,7 @@ public class Authenticator {
     }
     private String generateSafeToken() {
         SecureRandom random = new SecureRandom();
-        byte bytes[] = new byte[30];
+        byte[] bytes = new byte[30];
         random.nextBytes(bytes);
         Base64.Encoder encoder = Base64.getUrlEncoder().withoutPadding();
         String token = encoder.encodeToString(bytes);

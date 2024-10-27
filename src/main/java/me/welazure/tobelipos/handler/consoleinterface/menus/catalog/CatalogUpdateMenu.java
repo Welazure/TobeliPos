@@ -2,12 +2,9 @@ package me.welazure.tobelipos.handler.consoleinterface.menus.catalog;
 
 import me.welazure.tobelipos.handler.catalog.Catalog;
 import me.welazure.tobelipos.handler.catalog.Item;
-import me.welazure.tobelipos.handler.consoleinterface.MenuHandler;
 import me.welazure.tobelipos.handler.consoleinterface.menus.Menu;
 import me.welazure.tobelipos.handler.consoleinterface.menus.SubMenu;
 import me.welazure.tobelipos.utils.Reader;
-
-import java.util.List;
 
 public class CatalogUpdateMenu extends SubMenu {
     private Item selected = null;
@@ -33,54 +30,53 @@ public class CatalogUpdateMenu extends SubMenu {
             getHandler().clearConsole();
             showItemSelectMenu(parentMenu, rd);
         } else {
-            while (true) {
-                getHandler().clearConsole();
-                System.out.println("Item being updated: \n" + selected);
-                System.out.println("\n");
+            getHandler().clearConsole();
+            System.out.println("Item being updated: \n" + selected);
+            System.out.println("\n");
 
 
-                int input = getHandler().getOptions(false,
-                        "Choose field to update: \n" +
-                                "[1]: Name\n" +
-                                "[2]: ID\n" +
-                                "[3]: Description\n" +
-                                "[4]: Price\n" +
-                                "[5]: Stock\n" +
-                                "[6]: Quantity unit\n" +
-                                "[9]: Unselect item\n" +
-                                "[0]: Return\n" +
-                                "Input: ", 0, 9);
-                switch (input) {
-                    case 1:
-                        showNameUpdateMenu(parentMenu, rd);
-                        break;
-                    case 2:
-                        showIDUpdateMenu(parentMenu, rd);
-                        break;
-                    case 3:
-                        showDescriptionUpdateMenu(parentMenu, rd);
-                        break;
-                    case 4:
-                        showPriceUpdateMenu(parentMenu, rd);
-                        break;
-                    case 5:
-                        showStockUpdateMenu(parentMenu, rd);
-                        break;
-                    case 6:
-                        showUnitUpdateMenu(parentMenu, rd);
-                        break;
-                    case 0:
-                        getParent().show();
-                        break;
-                    case 9:
-                        showClearSelected(true);
-                        break;
-                    default:
-                        showClearSelected(false);
-                        break;
-                }
+            int input = getHandler().getOptions(false,
+                    "Choose field to update: \n" +
+                            "[1]: Name\n" +
+                            "[2]: ID\n" +
+                            "[3]: Description\n" +
+                            "[4]: Price\n" +
+                            "[5]: Stock\n" +
+                            "[6]: Quantity unit\n" +
+                            "[9]: Unselect item\n" +
+                            "[0]: Return\n" +
+                            "Input: ", 0, 9);
+            switch (input) {
+                case 1:
+                    showNameUpdateMenu(parentMenu, rd);
+                    break;
+                case 2:
+                    showIDUpdateMenu(parentMenu, rd);
+                    break;
+                case 3:
+                    showDescriptionUpdateMenu(parentMenu, rd);
+                    break;
+                case 4:
+                    showPriceUpdateMenu(parentMenu, rd);
+                    break;
+                case 5:
+                    showStockUpdateMenu(parentMenu, rd);
+                    break;
+                case 6:
+                    showUnitUpdateMenu(parentMenu, rd);
+                    break;
+                case 0:
+                    getParent().show();
+                    break;
+                case 9:
+                    showClearSelected(true);
+                    break;
+                default:
+                    showClearSelected(false);
+                    break;
             }
         }
+        getParent().show();
     }
 
     private void showItemSelectMenu(CatalogMenu catalogMenu, Reader rd) {
@@ -117,6 +113,7 @@ public class CatalogUpdateMenu extends SubMenu {
             System.out.println("Name cannot be empty!");
         }
         selected.setName(newName);
+        showClearSelected(false);
     }
 
     private void showIDUpdateMenu(CatalogMenu catalogMenu, Reader rd) {
@@ -141,6 +138,7 @@ public class CatalogUpdateMenu extends SubMenu {
             break;
         }
         selected.setID(newID);
+        showClearSelected(false);
     }
 
     public void showDescriptionUpdateMenu(CatalogMenu catalogMenu, Reader rd) {
@@ -152,11 +150,12 @@ public class CatalogUpdateMenu extends SubMenu {
         System.out.print("Insert new description... ");
         String newDescription = rd.readLine();
         selected.setDescription(newDescription);
+        showClearSelected(false);
     }
 
     public void showPriceUpdateMenu(CatalogMenu catalogMenu, Reader rd) {
         getHandler().clearConsole();
-        if(selected == null)
+        if (selected == null)
             return;
         System.out.println("Item being updated: \n" + selected);
         System.out.println("\n");
@@ -171,10 +170,12 @@ public class CatalogUpdateMenu extends SubMenu {
             }
         }
         selected.setPrice(price);
+        showClearSelected(false);
     }
+
     public void showStockUpdateMenu(CatalogMenu catalogMenu, Reader rd) {
         getHandler().clearConsole();
-        if(selected == null)
+        if (selected == null)
             return;
         System.out.println("Item being updated: \n" + selected);
         System.out.println("\n");
@@ -188,8 +189,10 @@ public class CatalogUpdateMenu extends SubMenu {
                 System.out.println("Invalid input!");
             }
         }
-        selected.setQuantity(quantity);
+        getParent().getHandler().getDelegator().getCatalog().setItemCount(selected, quantity);
+        showClearSelected(false);
     }
+
     public void showUnitUpdateMenu(CatalogMenu catalogMenu, Reader rd) {
         getHandler().clearConsole();
         getHandler().clearConsole();
@@ -205,5 +208,6 @@ public class CatalogUpdateMenu extends SubMenu {
             System.out.println("Quantity unit cannot be empty!");
         }
         selected.setUnit(newUnit);
+        showClearSelected(false);
     }
 }

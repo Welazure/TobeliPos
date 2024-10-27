@@ -6,15 +6,13 @@ public class Item {
     private String ID;
     private String description;
     private double price;
-    private int quantity;
     private String unit;
 
-    public Item(String name, String ID, String description, double price, int quantity, String unit) {
+    public Item(String name, String ID, String description, double price, String unit) {
         this.name = name;
         this.ID = ID;
         this.description = description;
         this.price = price;
-        this.quantity = quantity;
         this.unit = unit;
     }
     public String getName() {
@@ -41,12 +39,6 @@ public class Item {
     public void setPrice(double price) {
         this.price = price;
     }
-    public int getQuantity() {
-        return quantity;
-    }
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
     public String getUnit() {
         return unit;
     }
@@ -55,6 +47,9 @@ public class Item {
     }
     @Override
     public String toString() {
-        return String.format("Item %s, ID: %s, Description: %s, Price: %s%.2f, Stock: %s %s", name, ID, description, CURRENCY, price, quantity, unit);
+        return String.format("Item %s, ID: %s, Description: %s, Price: %s%.2f", name, ID, description, CURRENCY, price);
+    }
+    public String toString(int quantity) {
+        return toString() + String.format(", Quantity: %d %s", quantity, unit);
     }
 }
