@@ -19,7 +19,7 @@ public class AuthMenu extends Menu {
         System.out.println("Welcome to the Auth Menu");
         System.out.print("Menu:\n" +
                 "[1]: Login\n" +
-                "[2]: Register\n" +
+             //   "[2]: Register\n" +
                 "[0]: Back to Main Menu\n" +
                 "Input: ");
         int input = rd.getInt();
@@ -27,9 +27,9 @@ public class AuthMenu extends Menu {
         case 1:
             this.login();
             break;
-        case 2:
-            this.register();
-            break;
+//        case 2:  //Uncomment to enable register
+//            this.register();
+//            break;
         case 0:
             getHandler().mainMenu();
             break;
@@ -42,7 +42,6 @@ public class AuthMenu extends Menu {
 
     public void login() {
         getHandler().clearConsole();
-        int input = 0;
         Reader rd = getHandler().getDelegator().getReader();
         System.out.println("Welcome to the Login Menu");
         System.out.print("Please enter your username: ");
@@ -55,7 +54,7 @@ public class AuthMenu extends Menu {
 
         User user = users.getUser(name);
         if (user == null) {
-            invalidLogin(input, rd);
+            invalidLogin();
         } else {
             boolean succeeded = auth.authenticate(user, name, password);
             if (succeeded) {
@@ -65,13 +64,13 @@ public class AuthMenu extends Menu {
                 rd.readLine();
                 getHandler().mainMenu();
             } else {
-                invalidLogin(input, rd);
+                invalidLogin();
             }
         }
     }
 
-    public void invalidLogin(int input, Reader rd) {
-        input = getHandler().getOptions(true, "Username or password incorrect! Please try again.\n" +
+    public void invalidLogin() {
+        int input = getHandler().getOptions(true, "Username or password incorrect! Please try again.\n" +
                 "Menu:\n" +
                 "[1]: Try again\n" +
                 "[2]: Register\n" +

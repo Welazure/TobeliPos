@@ -56,6 +56,8 @@ public class Delegator {
         catalog = new CatalogHandler();
         salesOrder = new SalesOrderHandler();
 
+
+        // Sample data for testing!
         catalog.addItem(new Item("Garam", "S001", "Garam Dapur", 10000.0d, "Bungkus"), 100);
         catalog.addItem(new Item("Merica", "S002", "Merica Putih", 10000.0d, "Bungkus"), 100);
         catalog.addItem(new Item("Cengkeh", "S003", "Cengkeh", 10000.0d, "Bungkus"), 100);

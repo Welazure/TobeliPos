@@ -15,7 +15,9 @@ public class MainMenu extends Menu {
     public void show() {
         User user = getHandler().getDelegator().getCurrentUser();
         if(user == null)
-            user = new Admin(10000, "root", "asdasda");
+            user = new Admin(10000, "root", "asdasda"); // comment to enable verification
+
+        // Uncomment to enable verification
 //        if (user == null) {
 //            int input = getHandler().getOptions(true, "You are not logged in!\n" +
 //                    "[1]: Authenticate!\n" +
