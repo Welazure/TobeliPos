@@ -61,7 +61,8 @@ public class Order {
     }
     public void additem(Item item, int quantity) {
         if(items.containsKey(item)) {
-            items.put(item, items.get(item) + quantity);
+            items.remove(item);
+            items.put(item, quantity);
             return;
         }
         items.put(item, quantity);

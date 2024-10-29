@@ -25,7 +25,7 @@ public class CatalogSearchMenu extends SubMenu {
             parentMenu.printToShow();
 
             List<Item> items = filterItems(catalog, parentMenu, rd);
-            if(items == null) {
+            if (items == null) {
                 break;
             }
             parentMenu.setToShow(items);

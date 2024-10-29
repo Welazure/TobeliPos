@@ -50,6 +50,6 @@ public class Item {
         return String.format("Item %s, ID: %s, Description: %s, Price: %s%.2f", name, ID, description, CURRENCY, price);
     }
     public String toString(int quantity) {
-        return toString() + String.format(", Quantity: %d %s", quantity, unit);
+        return this + String.format(", Quantity: %d %s", quantity, unit);
     }
 }
