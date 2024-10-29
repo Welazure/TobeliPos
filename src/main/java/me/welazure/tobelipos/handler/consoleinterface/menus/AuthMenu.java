@@ -91,18 +91,17 @@ public class AuthMenu extends Menu {
 
     public void register() {
         getHandler().clearConsole();
-        int input = 0;
+        int input;
         Reader rd = getHandler().getDelegator().getReader();
         System.out.println("Welcome to the Register Menu");
         System.out.print("Input username: ");
         String name = rd.readLine();
         System.out.print("Input password: ");
         String password = rd.readLine();
-        while (true) {
+        do {
             System.out.print("Are you an admin? [0/1]: ");
             input = rd.getInt();
-            if (input >= 0 && input <= 1) break;
-        }
+        } while (input < 0 || input > 1);
         boolean success = getHandler().getDelegator().getUsers().createUser(input == 1, name, password);
         if (success) {
             input = getHandler().getOptions(true, "Successfully registered!\n" +

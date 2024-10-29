@@ -63,7 +63,7 @@ public class Delegator {
         catalog.addItem(new Item("Cengkeh", "S003", "Cengkeh", 10000.0d, "Bungkus"), 100);
         catalog.addItem(new Item("Syrup", "D001", "Sirup", 10000.0d, "Botol"), 100);
 
-        Map<Item, Integer> items = new HashMap<Item, Integer>();
+        Map<Item, Integer> items = new HashMap<>();
         items.put((Item) catalog.getMap().keySet().toArray()[0], 1);
         items.put((Item) catalog.getMap().keySet().toArray()[1], 2);
         salesOrder.addOrder(new Order("OD001", "James", "Shipping", LocalDateTime.now(), items));
