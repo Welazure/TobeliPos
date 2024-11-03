@@ -154,19 +154,20 @@ public class SalesUpdateMenu extends SubMenu {
         Map<Item, Integer> items = selected.getItems();
         List<Map.Entry<Item, Integer>> itemSet = new ArrayList<>(items.entrySet());
         StringBuilder builder = new StringBuilder();
-        builder.append("Select Item ID to update: ");
+        builder.append("Select Item ID to update: \n");
         for(int i = 0; i < itemSet.size(); i++) {
             Map.Entry<Item, Integer> item = itemSet.get(i);
-            builder.append(String.format("[%s]: %s", i + 1 , item.getKey().toString(item.getValue())));
+            builder.append(String.format("[%s]: %s\n", i + 1 , item.getKey().toString(item.getValue())));
         }
-        builder.append("[0]: Cancel");
+        builder.append("[0]: Cancel\n");
         builder.append("Input: ");
         int input = getHandler().getOptions(false, builder.toString(), 0, itemSet.size());
         if(input == 0) {
             showClearSelected(false);
             return;
         }
-        Item item = itemSet.get(input).getKey();
+        Item item = itemSet.get(input-1).getKey();
+        System.out.println("\nUpdating item: \n" + item.toString(itemSet.get(input-1).getValue()));
         input = getHandler().getOptions(false, "[1]: Change quantity\n" +
                 "[2]: Delete Item\n" +
                 "[0]: Select another item\n" +

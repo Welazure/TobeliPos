@@ -46,7 +46,7 @@ public class SalesOrderHandler implements SalesOrder{
     @Override
     public List<Order> searchOrderByItemID(String id) {
         return orders.stream().filter(order -> {
-            List<Item> items = order.getItems().keySet().stream().toList();
+            List<Item> items = new ArrayList<>(order.getItems().keySet());
             return items.stream().anyMatch(item -> item.getID().toLowerCase().contains(id.toLowerCase()));
         }).collect(Collectors.toList());
     }
@@ -54,6 +54,10 @@ public class SalesOrderHandler implements SalesOrder{
     @Override
     public List<Order> searchOrderByUserName(String name) {
         return orders.stream().filter(order -> order.getCustomer().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toList());
+    }
+    @Override
+    public List<Order> searchOrderByStatus(String status) {
+        return orders.stream().filter(order -> order.getStatus().toLowerCase().contains(status.toLowerCase())).collect(Collectors.toList());
     }
 
     @Override

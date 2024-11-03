@@ -17,6 +17,7 @@ public interface SalesOrder {
     List<Order> searchOrderByID(String id);
     List<Order> searchOrderByItemID(String id);
     List<Order> searchOrderByUserName(String name);
+    List<Order> searchOrderByStatus(String status);
 
     void addOrder(Order order);
     void removeOrder(Order order);

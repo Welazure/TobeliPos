@@ -36,8 +36,6 @@ public class AuthMenu extends Menu {
         default:
             show();
         }
-
-
     }
 
     public void login() {

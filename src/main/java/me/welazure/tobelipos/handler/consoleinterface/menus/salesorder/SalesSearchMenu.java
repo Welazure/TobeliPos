@@ -42,9 +42,10 @@ public class SalesSearchMenu extends SubMenu {
                 "[4]: Order ID & Customer Name" +
                 "[5]: Order ID & Item ID\n" +
                 "[6]: Customer Name & Item ID\n" +
-                "[7]: All parameter\n" +
+                "[7]: By status\n" +
+                "[8]: All Parameter\n" +
                 "[0]: Return\n" +
-                "Input: ", 0, 7);
+                "Input: ", 0, 8);
         if (option == 0) {
             return null;
         }
@@ -61,6 +62,7 @@ public class SalesSearchMenu extends SubMenu {
         boolean byID = false;
         boolean byName = false;
         boolean byItemID = false;
+        boolean byStatus = false;
         switch (option) {
             case 1:
                 byID = true;
@@ -78,17 +80,22 @@ public class SalesSearchMenu extends SubMenu {
             case 5:
                 byID = true;
                 byItemID = true;
+                break;
             case 6:
                 byName = true;
                 byItemID = true;
                 break;
             case 7:
+                byStatus = true;
+                break;
+            case 8:
                 byID = true;
                 byItemID = true;
                 byName = true;
+                byStatus = true;
                 break;
             default:
-
+                break;
         }
         List<Order> ordersList = new ArrayList<>();
         if (byID) {
@@ -106,6 +113,12 @@ public class SalesSearchMenu extends SubMenu {
         if (byItemID) {
             orders.searchOrderByItemID(input).stream().forEach(x -> {
                 if (!ordersList.contains(x))
+                    ordersList.add(x);
+            });
+        }
+        if(byStatus) {
+            orders.searchOrderByStatus(input).stream().forEach(x -> {
+                if(!ordersList.contains(x))
                     ordersList.add(x);
             });
         }
